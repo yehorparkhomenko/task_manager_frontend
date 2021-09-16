@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Form, Input, Button, Select, message} from 'antd';
 import API from '../../services/API';
-import { buildErrorsText } from '../../utils';
+import { buildErrorsText, statusCodeToText } from '../../utils';
 
 const { TextArea } = Input;
 
@@ -36,14 +36,6 @@ class EditTaskPage extends React.Component {
     }
   };
 
-  statusTextToCode(status) {
-    if(status == "Задача не выполнена") 
-      return 0
-    if(status == "Задача выполнена") 
-      return 10
-    return 0
-  }
-
   render() {
     return (
         <Form
@@ -69,7 +61,7 @@ class EditTaskPage extends React.Component {
             <Form.Item 
               label="Статус"
               name="status"
-              initialValue={this.statusTextToCode(this.props.location.state.task['status']).toString()}
+              initialValue={this.props.location.state.task['status'].toString()}
             >
             <Select>
               <Select.Option value="0">задача не выполнена</Select.Option>

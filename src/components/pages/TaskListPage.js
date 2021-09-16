@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { List, Avatar, Button, Skeleton, Form, Radio} from 'antd';
 import API from '../../services/API';
 import taskLogo from '../../task-logo.png'
+import { statusCodeToText } from '../../utils';
 
 const mapStateToProps = state => ({
   developerName: state.developerName
@@ -42,10 +43,7 @@ class TaskListPage extends React.Component {
       return []
     }
 
-    const data = response['message']['tasks']
-    data.forEach(item => item['status'] = this.statusCodeToText(item["status"]));
-
-    return data
+    return response['message']['tasks']
   };
 
   async onLoadMore() {
@@ -66,21 +64,6 @@ class TaskListPage extends React.Component {
       page: newPage,
     });
   };
-
-  statusCodeToText(statusCode){
-    switch(statusCode) {
-      case 0:
-        return "задача не выполнена";
-      case 1:
-        return "задача не выполнена, отредактирована админом"
-      case 10: 
-        return "задача выполнена"
-      case 11:
-        return "задача отредактирована админом и выполнена"
-      default:
-        return "Задача не выполнена"
-    }
-  }
 
   onEditTask(task) {
     this.props.history.push({
@@ -164,7 +147,7 @@ class TaskListPage extends React.Component {
                   <Avatar src={taskLogo} />
                 }
                 title={<h4>{item['username']}</h4>}
-                description={item['status']}
+                description={statusCodeToText(item['status'])}
               />
               <div>{item['text']}</div>
             </Skeleton>
