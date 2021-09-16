@@ -25,7 +25,7 @@ class EditTaskPage extends React.Component {
                                       this.props.token, 
                                       this.props.location.state.task['id'],
                                       values['status'],
-                                      this.props.username,
+                                      values['username'],
                                       values["email"], 
                                       values['text'])
     
