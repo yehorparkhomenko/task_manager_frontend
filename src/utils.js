@@ -8,7 +8,7 @@ export function buildErrorsText(errorsDict) {
   return errorText
 }
 
-export function statusCodeToText(statusCode){
+export function statusCodeToText(statusCode) {
     switch(statusCode) {
       case 0:
         return "задача не выполнена";
@@ -22,3 +22,14 @@ export function statusCodeToText(statusCode){
         return "Задача не выполнена"
     }
   }
+
+export function simplifyStatus(statusCode) {
+  switch(statusCode) {
+    case 1:
+      return 0;
+    case 11:
+      return 10;
+    default:
+      return 0;
+  }
+}

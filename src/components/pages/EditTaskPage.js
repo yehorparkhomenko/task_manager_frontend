@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Form, Input, Button, Select, message} from 'antd';
 import API from '../../services/API';
-import { buildErrorsText, statusCodeToText } from '../../utils';
+import { buildErrorsText, simplifyStatus} from '../../utils';
 
 const { TextArea } = Input;
 
@@ -20,7 +20,6 @@ class EditTaskPage extends React.Component {
   }
 
   async onSubmit(values) {
-    console.log(values)
     const response = await API.edit(this.props.developerName, 
                                       this.props.token, 
                                       this.props.location.state.task['id'],
@@ -61,7 +60,7 @@ class EditTaskPage extends React.Component {
             <Form.Item 
               label="Статус"
               name="status"
-              initialValue={this.props.location.state.task['status'].toString()}
+              initialValue={simplifyStatus(this.props.location.state.task['status']).toString()}
             >
             <Select>
               <Select.Option value="0">задача не выполнена</Select.Option>
