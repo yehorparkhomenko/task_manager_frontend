@@ -30,6 +30,17 @@ class EditTaskPage extends React.Component {
     
     if(response["status"] == ["ok"]) {
       message.success('Задача изменена!')
+
+      const task = this.props.location.state.task
+      task['status'] = values['status']
+      task['username'] = values['username']
+      task['email'] = values['email']
+      task['text'] = values['text']
+
+      this.props.history.push({
+        pathname: '/edit',
+        state: { task: task }
+      })
     } else {
       message.error(buildErrorsText(response["message"]))
     }
