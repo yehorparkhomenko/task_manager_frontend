@@ -20,10 +20,11 @@ class EditTaskPage extends React.Component {
   }
 
   async onSubmit(values) {
+    console.log(values)
     const response = await API.edit(this.props.developerName, 
                                       this.props.token, 
                                       this.props.location.state.task['id'],
-                                      parseInt(values['status'], 10),
+                                      values['status'],
                                       this.props.username,
                                       values["email"], 
                                       values['text'])
