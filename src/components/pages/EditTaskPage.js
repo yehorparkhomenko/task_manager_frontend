@@ -60,7 +60,6 @@ class EditTaskPage extends React.Component {
           autoComplete="off"
           style={{textAlign: "center"}}
           initialValues={{
-              status: this.props.location.state.task['status'],
               username: this.props.location.state.task['username'],
               email: this.props.location.state.task['email'],
               text: this.props.location.state.task['text']
@@ -69,6 +68,7 @@ class EditTaskPage extends React.Component {
             <Form.Item 
               label="Статус"
               name="status"
+              initialValue={this.statusTextToCode(this.props.location.state.task['status']).toString()}
             >
             <Select>
               <Select.Option value="0">задача не выполнена</Select.Option>
